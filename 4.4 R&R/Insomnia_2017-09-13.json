@@ -1,0 +1,139 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2017-09-13T09:54:04.388Z",
+	"__export_source": "insomnia.desktop.app:v5.8.3",
+	"resources": [
+		{
+			"_id": "wrk_fd10670b45a449cc95fb295ede812a02",
+			"parentId": null,
+			"modified": 1505210706077,
+			"created": 1505210706077,
+			"name": "Insomnia",
+			"description": "",
+			"certificates": [],
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_3d7af832a57e4fec8479f143cf1ab14d",
+			"parentId": "wrk_fd10670b45a449cc95fb295ede812a02",
+			"modified": 1505210706082,
+			"created": 1505210706082,
+			"name": "Base Environment",
+			"data": {},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_72bed52d98ab4bd3bf0c730cb37c3b71",
+			"parentId": "wrk_fd10670b45a449cc95fb295ede812a02",
+			"modified": 1505293504952,
+			"created": 1505210706080,
+			"name": "Default Jar",
+			"cookies": [
+				{
+					"creation": "2017-09-13T09:05:04.951Z",
+					"key": "Watson-DPAT",
+					"value": "6g4wkAcctSdIk9e4cwJVF4T6OYOktsFHwzEQEAlJRLbqbcYDHfnxLpzSiHwrCCj3rhzy6uduRyBqqXm3ZuWdb1xjf%2BknZiaFBraGXs5JEW%2Bm2Owpy4fvDZKQUedcn0MfncPQ5xhf3oNJcKtl16vTK7Iq36INv2rGkwlcmiIC87Kn2OsvNHd1dItX7AY9wJJ9%2FYRpor%2FqDDdoPUlTH8Sx0H3GhjBovT8f42iABZBVuZodzbnFtgHlHpEx5EU7n9dd21v7s4hE%2BM5JkvNkWtqQeJhLOqi129WeKC8x5n5eNhq%2BY%2B3gqS5puBLXp%2FzRhDLHgXHVcxvNZiRyRHtYeH3l1KkI6A1i7mOX0XTrFC5V9st%2F9%2Ba1eUV8lTBOhWFAwF7KBwvZEx6xR71d5U6vTy2ffTuxYeuZF66nQ3dyDaLTrB7%2BOzQTefPcIhmX9WDuMhYkgY0vhBye%2F%2BTON4SL31uVvHreMLRCct5%2B2FsTFKo1Q5P0zPStSkR7%2Furb65jk7eaoa7%2BYzPZGtW15%2Bg2I%2FpZwmvyat8mCCeGlWZbsblrBHvzcRO%2BvzRbd9sJXYQXqGZ6uKBvrJjHJLUaba7czy5AoEhxDxIgzUBfpD3wigWWZvjHPi2wgOkFXVl%2BzxCl848Vn0gCLI9vLrl1IlEPHu3Z%2B2pUVzrQR%2Bem1bBGhrKj3wupbZIOTfHsOkf2%2FJvv0gpvHLov5YbNGItlQQwrEz3gHDQFvU9vkw7cHU76tnnoV3DTKF%2BLPAgUOp9UKNNpAHOkLI%2FPZFTvIr0MPJwHmQBiTSKpQf05Xu%2Fdd11CXT2Sl0fNZG7%2B9LKt42PUGXSWpGxdX%2FJ7CtlCZs7u16xkGr4PjXGWzjQLKjmLhUub1M49mzTyaBDCUCicoykgjBtPZ%2FmSv8gJ2lGu%2BUdGNkaeFEtOzn7tQZcgRFm2mr6%2Bg05Yc%2FyM1qwmNexNRSo5ZO6yorKYFXlW9hsQbpU7hkwePGgEUnuxjoeAQl%2Fbm9tXQp9oPT7qS2wgZCukC59sz1DILWPVoKcqZ3ztwNJrOQB%2BnXAHkUAa6DEOQo6s2armhfocc0TrYv5LOnkHboE%2BQvNsqK7ZB%2BPmJ%2Foovj6JpKTnJcYJHyXDuX8DSpY%2B0EOnt%2Fu6H1lwV%2BDLgMPqx%2BKE4dnzIsiQod6y%2B6GByf9ZeCynfXXmM0zt58zazLq8nzocHrxQjsEK4zOLgBj1jPg%3D%3D",
+					"path": "/retrieve-and-rank/api",
+					"secure": true,
+					"httpOnly": true,
+					"hostOnly": true,
+					"domain": "gateway.watsonplatform.net",
+					"lastAccessed": "2017-09-13T09:05:04.951Z",
+					"id": "5527089263698406"
+				}
+			],
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_1cd43290f9d4460f8da11f816f687fe0",
+			"parentId": "wrk_fd10670b45a449cc95fb295ede812a02",
+			"modified": 1505295399611,
+			"created": 1505295399611,
+			"name": "R&R",
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1505295399611,
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_b603a93b283f4ee0a6934c4f11e819a8",
+			"parentId": "wrk_fd10670b45a449cc95fb295ede812a02",
+			"modified": 1505295812502,
+			"created": 1505295340237,
+			"url": "https://25e39ae2-ec05-412c-999f-03c66e1a4fb3:pTyB6nG328sU@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/select?",
+			"name": "Test Ranker",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "q",
+					"value": "将来の医療技術の姿は？",
+					"id": "pair_c4e726d715b645d999cf8a9794a5f17b"
+				},
+				{
+					"name": "wt",
+					"value": "json",
+					"id": "pair_8c835e8dd4f24e53ac1cc81102ada8ae"
+				},
+				{
+					"name": "fl",
+					"value": "id,title,body",
+					"id": "pair_07345151a82a44e0be471d4a41f3e718"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1505291018355,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_74e6c066aa534525aae8366412220383",
+			"parentId": "wrk_fd10670b45a449cc95fb295ede812a02",
+			"modified": 1505295896429,
+			"created": 1505295832671,
+			"url": "https://25e39ae2-ec05-412c-999f-03c66e1a4fb3:pTyB6nG328sU@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/fcselect?",
+			"name": "Test Solr",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "ranker_id",
+					"value": "7ff711x34-rank-2281",
+					"id": "pair_c4e726d715b645d999cf8a9794a5f17b"
+				},
+				{
+					"name": "q",
+					"value": "将来の医療技術の姿は？",
+					"id": "pair_8c835e8dd4f24e53ac1cc81102ada8ae"
+				},
+				{
+					"name": "wt",
+					"value": "json",
+					"id": "pair_07345151a82a44e0be471d4a41f3e718"
+				},
+				{
+					"name": "fl",
+					"value": "id,title,body",
+					"id": "pair_04081591ba674856bc0f1bbb032eadc2"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1505289018067,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		}
+	]
+}

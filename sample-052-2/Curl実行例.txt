@@ -1,0 +1,151 @@
+﻿＜Chapter 4.3 Natural Language Classifier＞
+
+
+■ NLC分類器の作成
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "74e78385-0e9e-41a3-8908-50c24fb23970":"G8LeBGBGuIA8" -F training_data=@"E:\nlc_training_cadportal.csv" -F training_metadata="{\"language\":\"ja\",\"name\":\"FE1S_NLC_API_CADPortal_Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+
+
+
+■ NLC分類器のリストの取得
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "74e78385-0e9e-41a3-8908-50c24fb23970":"G8LeBGBGuIA8" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/"
+
+■ NLC分類器の学習状況の取得
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "74e78385-0e9e-41a3-8908-50c24fb23970":"G8LeBGBGuIA8" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/ad940ex207-nlc-1389"
+
+
+
+■ NLC分類器のテスト
+
+
+https://74e78385-0e9e-41a3-8908-50c24fb23970:G8LeBGBGuIA8@gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/ad940ex207-nlc-1389/classify?text={質問文}"
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "74e78385-0e9e-41a3-8908-50c24fb23970":"G8LeBGBGuIA8" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/ad940ex207-nlc-1389/classify?text=%e3%83%9e%e3%82%b0%e3%83%ad%e3%81%ae%e3%81%8a%e5%88%ba%e8%ba%ab%e9%a3%9f%e3%81%b9%e3%81%9f%e3%81%84"
+
+
+＜Chapter 4.4 Retrieve and Rank＞
+
+
+■ Solrクラスタの作成
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -H "Content-Type: application/json" -X POST -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" -d "{\"cluster_name\":\"FE1S_Retrieve and Rank_API_Cluster\"}" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters"
+
+
+
+■ Solrクラスタ情報の取得
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters"
+
+
+
+■ Solr設定ファイルのアップロード
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X POST -H "Content-Type: application/zip" -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/config/japanese_config" --data-binary @"E:\solr-japanese.zip
+
+"
+
+■ Solr設定ファイルの削除
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X DELETE -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/config/japanese_config"
+
+■ Solrコレクションの作成
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X POST -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/admin/collections" -d "action=CREATE&name=FE1S_test_collection&collection.configName=japanese_config&wt=json"
+
+
+
+■ Solrコレクションにデータを投入
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X POST -H "Content-Type: application/json" -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection/update" --data-binary @"E:\FE1S_R&RData.json
+
+"
+
+
+■ Solrでの検索
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/select?q=%e6%9c%aa%e6%9d%a5&wt=json&fl=id,title,body"
+
+
+https://25e39ae2-ec05-412c-999f-03c66e1a4fb3:pTyB6nG328sU@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/select?q=%E5%B0%86%E6%9D%A5%E3%81%AE%E5%8C%BB%E7%99%82%E6%8A%80%E8%A1%93%E3%81%AE%E5%A7%BF%E3%81%AF%EF%BC%9F&wt=json&fl=id,title,body
+
+■ Rankerの学習状況の取得
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/7ff711x34-rank-2281"
+
+
+
+■ Solrの検索結果をRankerで並べ替える
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -u "25e39ae2-ec05-412c-999f-03c66e1a4fb3":"pTyB6nG328sU" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/fcselect?ranker_id=7ff711x34-rank-2281&q=%e6%9c%aa%e6%9d%a5&wt=json&fl=id,title,body"
+
+
+https://25e39ae2-ec05-412c-999f-03c66e1a4fb3:pTyB6nG328sU@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/fcselect?ranker_id=7ff711x34-rank-2281&q=%E5%B0%86%E6%9D%A5%E3%81%AE%E5%8C%BB%E7%99%82%E6%8A%80%E8%A1%93%E3%81%AE%E5%A7%BF%E3%81%AF%EF%BC%9F&wt=json&fl=id,title,body
+
+＜Chapter 4.5 Document Conversion＞
+
+
+■ ドキュメントの変換
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X POST -u "6daa0257-b443-405f-97a3-6c7d9dd36152":"3XYKIsgkLJrj" -F config="{\"conversion_target\":\"answer_units\"}" -F file=@"E:\SearchPortal_UserManual.pdf" "https://gateway.watsonplatform.net/document-conversion/api/v1/convert_document?version=2015-12-15"
+
+ > E:\SearchPortal_UserManual.json
+
+<Visual Recognition>
+■ 独自の分類器を作成
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X POST -F honda_positive_examples=@"E:\honda_positive_examples.zip" -F toyota_positive_examples=@"E:\toyota_positive_examples.zip" -F nissan_positive_examples=@"E:\nissan_positive_examples.zip" -F negative_examples=@"E:\negative_examples.zip" -F "name=car_maker" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key=5f2443ba2420af65151ae18c7dd6f1cc634c6438&version=2016-05-20"
+
+
+■ 独自の分類器の学習状況の取得
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X GET "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers/car_maker_1547761112?api_key=5f2443ba2420af65151ae18c7dd6f1cc634c6438&version=2016-05-20"
+
+
+
+■ 独自の分類器を使用した分類
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X POST -H "Accept-Language: ja" -F images_file=@"E:\testdata\honda\001_test_honda.jpg" -F parameters=@"E:\testdata\params.json" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=5f2443ba2420af65151ae18c7dd6f1cc634c6438&version=2016-05-20"
+
+
+
+
+
+
+
+■ 音声ファイルを文字列に変換
+
+curl -X POST -u "{username}":"{password}" --header "Content-Type: audio/flac" --databinary @{音声ファイル名} "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?timestamps=true&word_alternatives_threshold=0.9&model=ja-JP_BroadbandModel"
+※音声ファイルのフォーマットに合わせてContent-Typeも変更すること。
+
+
+■ 文字列を音声ファイルに変換
+
+curl -X GET -u "{username}":"{password}" --output hello_world.wav "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?accept=audio/wav&text={文字列}&voice=ja-JP_EmiVoice"
+
+＜Chapter 4.8 Visual Recognition＞
+
+
+
+■ 独自の分類器を使用した分類
+
+curl -X POST -H "Accept-Language: ja" -F "images_file=@{分類する画像ファイル名}" -F "parameters=@{パラメータファイル名}" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key={api-key}&version=2016-05-20"
+
+
+curl -x "http://hg-vm-prx-sdc.t.rd.honda.com:8080" -X GET -u "74e78385-0e9e-41a3-8908-50c24fb23970":"G8LeBGBGuIA8" -H "Content-Type:application/json" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/"

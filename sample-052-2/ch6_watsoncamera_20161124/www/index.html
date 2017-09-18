@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+  ons.ready(function() {
+    var cameraButton = document.getElementById('camera-button');
+    var faceDetectButton = document.getElementById('face-detect-button');
+    var photoFileUri = null;
+    
+    //Cameraボタンのタップ
+    cameraButton.onclick = function() {
+      //Cordovaカメラプラグインの起動
+      navigator.camera.getPicture(function(fileUri) {
+        //画像が取得できた場合
+        var photoImg = document.getElementById('photo-img');
+        photoFileUri = fileUri;
+        photoImg.src = photoFileUri;
+        faceDetectButton.removeAttribute('disabled');
+      }, function(message) {
+        //画像が取得できない場合
+        alert(message);
+      }, {
+        quality: 50,
+        targetWidth: 240,
+        targetHeight: 320,
+        //sourceTypeは下記から選択
+        // CAMERA：カメラを起動して撮影
+        // PHOTOLIBRARY：フォトライブラリーから選択
+        sourceType: Camera.PictureSourceType.CAMERA,
+        destinationType: Camera.DestinationType.FILE_URI
+      });
+    };
+    
+    var apiKey = '＜Visual Recognitionのapi_key＞';
+    
+    //Face Detectボタンのタップ
+    faceDetectButton.onclick = function() {
+      //画面の遷移
+      navigator1.pushPage('page2.html');
+      //画像ファイルのアップロード（顔認識APIの呼び出し）
+      var url = 'https://gateway-a.watsonplatform.net/visual-recognition/api/v3/detect_faces?api_key=' + apiKey + '&version=2016-05-20';
+      var options = new FileUploadOptions();
+      options.fileKey = 'images_file';
+      options.fileName = 'uploadfile.jpg';
+      options.mimeType = 'image/jpeg';
+      var fileTransfer = new FileTransfer();
+      fileTransfer.upload(photoFileUri, url, function(r) {
+        //顔認識APIからのレスポンスを処理
+        var response = JSON.parse(r.response);
+        var image = response.images[0];
+        var text = '';
+        if ('faces' in image) {
+          if (image.faces.length > 0) {
+            //顔認識ができた場合
+            var face = image.faces[0];
+            //年齢
+            text += 'Age: ';
+            if ('max' in face.age && 'min' in face.age) {
+              //年齢の上限と下限が認識された場合
+              text += face.age.min + ' - ' + face.age.max + ' (' + face.age.score + ')<br>';
+            } else if ('max' in face.age) {
+              //年齢の上限のみ認識された場合
+              text += face.age.max + ' (' + face.age.score + ')<br>';
+            } else if ('min' in face.age) {
+              //年齢の下限のみ認識された場合
+              text += face.age.min + ' (' + face.age.score + ')<br>';
+            }
+            //性別
+            text += 'Gender: ' + face.gender.gender + ' (' + face.gender.score + ')';
+          } else {
+            //顔認識ができなかった場合
+            text += 'not found!';
+          }
+        } else if ('error' in image) {
+          //その他のエラーがあった場合
+          text += image.error.description;
+        }
+        //recognize...部分を書き換え
+        var message = document.getElementById('message');
+        message.innerHTML = text;
+      }, function(error) {
+          console.log(error);
+          alert(error.code);
+      }, options, true);
+    };
+  });
+</script>
+</head>
+<body>
+  <ons-navigator id="navigator1" page="page1.html"></ons-navigator> <!-- navigator→navigator1に変更しておく -->
+
+  <ons-template id="page1.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Take Photo</div>
+      </ons-toolbar>
+      <div style="text-align: center; padding: 1em;">
+        <ons-button id="camera-button">Camera</ons-button>
+          <img id="photo-img" width="280" style="margin: 1em auto;">
+        <ons-button id="face-detect-button" disabled>Face Detect</ons-button>
+      </div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page2.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Result</div>
+      </ons-toolbar>
+      <div style="text-align: center; padding: 1em;">
+        <div id="message">recognize...</div>
+      </div>
+    </ons-page>
+  </ons-template>
+</body>
+</html>

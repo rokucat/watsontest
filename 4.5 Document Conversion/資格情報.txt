@@ -1,0 +1,5 @@
+{
+  "url": "https://gateway.watsonplatform.net/document-conversion/api",
+  "username": "6daa0257-b443-405f-97a3-6c7d9dd36152",
+  "password": "3XYKIsgkLJrj"
+}

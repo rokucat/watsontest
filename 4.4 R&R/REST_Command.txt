@@ -1,0 +1,3 @@
+https://25e39ae2-ec05-412c-999f-03c66e1a4fb3:pTyB6nG328sU@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/fselect?ranker_id=7ff711x34-rank-2281&q=将来はどんなエネルギーが活用できますか？&wt=json&fl=id,title,body
+
+https://25e39ae2-ec05-412c-999f-03c66e1a4fb3:pTyB6nG328sU@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scfa068905_ed1c_4152_bda0_693fe721e5be/solr/FE1S_test_collection_3/select?q=将来はどんなエネルギーが活用できますか？&wt=json&fl=id,title,body
